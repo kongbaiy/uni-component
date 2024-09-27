@@ -1,6 +1,7 @@
 import path from 'node:path'
 import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
+import dts from 'vite-plugin-dts'
 import { extractorAttributify, transformerClass } from 'unocss-preset-weapp/transformer'
 
 const { presetWeappAttributify, transformerAttributify } = extractorAttributify()
@@ -79,49 +80,73 @@ export default async () => {
           },
         },
         rules: [
-          [/^m-(\d+)$/, ([, d]) => ({ margin: `${d}rpx` })],
-          [/^mt-(\d+)$/, ([, d]) => ({ 'margin-top': `${d}rpx` })],
-          [/^mb-(\d+)$/, ([, d]) => ({ 'margin-bottom': `${d}rpx` })],
-          [/^ml-(\d+)$/, ([, d]) => ({ 'margin-left': `${d}rpx` })],
-          [/^mr-(\d+)$/, ([, d]) => ({ 'margin-right': `${d}rpx` })],
-          [/^mx-(\d+)$/, ([, d]) => ({ margin: `0 ${d}rpx` })],
-          [/^my-(\d+)$/, ([, d]) => ({ margin: `${d}rpx 0` })],
-          [/^m-x-(\d+)$/, ([, d]) => ({ 'margin-left': `${d}rpx`, 'margin-right': `${d}rpx` })],
-          [/^m-y-(\d+)$/, ([, d]) => ({ 'margin-top': `${d}rpx`, 'margin-bottom': `${d}rpx` })],
+          [/^m-(\d+)$/, ([, d]: any) => ({ margin: `${d}rpx` })],
+          [/^mt-(\d+)$/, ([, d]: any) => ({ 'margin-top': `${d}rpx` })],
+          [/^mb-(\d+)$/, ([, d]: any) => ({ 'margin-bottom': `${d}rpx` })],
+          [/^ml-(\d+)$/, ([, d]: any) => ({ 'margin-left': `${d}rpx` })],
+          [/^mr-(\d+)$/, ([, d]: any) => ({ 'margin-right': `${d}rpx` })],
+          [/^mx-(\d+)$/, ([, d]: any) => ({ margin: `0 ${d}rpx` })],
+          [/^my-(\d+)$/, ([, d]: any) => ({ margin: `${d}rpx 0` })],
+          [/^m-x-(\d+)$/, ([, d]: any) => ({ 'margin-left': `${d}rpx`, 'margin-right': `${d}rpx` })],
+          [/^m-y-(\d+)$/, ([, d]: any) => ({ 'margin-top': `${d}rpx`, 'margin-bottom': `${d}rpx` })],
 
-          [/^p-(\d+)$/, ([, d]) => ({ padding: `${d}rpx` })],
-          [/^pl-(\d+)$/, ([, d]) => ({ 'padding-left': `${d}rpx` })],
-          [/^pr-(\d+)$/, ([, d]) => ({ 'padding-right': `${d}rpx` })],
-          [/^pt-(\d+)$/, ([, d]) => ({ 'padding-top': `${d}rpx` })],
-          [/^pb-(\d+)$/, ([, d]) => ({ 'padding-bottom': `${d}rpx` })],
-          [/^px-(\d+)$/, ([, d]) => ({ padding: `0 ${d}rpx` })],
-          [/^py-(\d+)$/, ([, d]) => ({ padding: `${d}rpx 0` })],
-          [/^p-y-(\d+)$/, ([, d]) => ({ 'padding-top': `${d}rpx`, 'padding-bottom': `${d}rpx` })],
-          [/^p-x-(\d+)$/, ([, d]) => ({ 'padding-left': `${d}rpx`, 'padding-right': `${d}rpx` })],
+          [/^p-(\d+)$/, ([, d]: any) => ({ padding: `${d}rpx` })],
+          [/^pl-(\d+)$/, ([, d]: any) => ({ 'padding-left': `${d}rpx` })],
+          [/^pr-(\d+)$/, ([, d]: any) => ({ 'padding-right': `${d}rpx` })],
+          [/^pt-(\d+)$/, ([, d]: any) => ({ 'padding-top': `${d}rpx` })],
+          [/^pb-(\d+)$/, ([, d]: any) => ({ 'padding-bottom': `${d}rpx` })],
+          [/^px-(\d+)$/, ([, d]: any) => ({ padding: `0 ${d}rpx` })],
+          [/^py-(\d+)$/, ([, d]: any) => ({ padding: `${d}rpx 0` })],
+          [/^p-y-(\d+)$/, ([, d]: any) => ({ 'padding-top': `${d}rpx`, 'padding-bottom': `${d}rpx` })],
+          [/^p-x-(\d+)$/, ([, d]: any) => ({ 'padding-left': `${d}rpx`, 'padding-right': `${d}rpx` })],
 
-          [/^w-(\d+)$/, ([, d]) => ({ width: `${d}rpx` })],
-          [/^h-(\d+)$/, ([, d]) => ({ height: `${d}rpx` })],
+          [/^w-(\d+)$/, ([, d]: any) => ({ width: `${d}rpx` })],
+          [/^h-(\d+)$/, ([, d]: any) => ({ height: `${d}rpx` })],
 
-          [/^top-(\d+)$/, ([, d]) => ({ top: `${d}rpx` })],
-          [/^bottom-(\d+)$/, ([, d]) => ({ bottom: `${d}rpx` })],
-          [/^left-(\d+)$/, ([, d]) => ({ left: `${d}rpx` })],
-          [/^right-(\d+)$/, ([, d]) => ({ right: `${d}rpx` })],
+          [/^top-(\d+)$/, ([, d]: any) => ({ top: `${d}rpx` })],
+          [/^bottom-(\d+)$/, ([, d]: any) => ({ bottom: `${d}rpx` })],
+          [/^left-(\d+)$/, ([, d]: any) => ({ left: `${d}rpx` })],
+          [/^right-(\d+)$/, ([, d]: any) => ({ right: `${d}rpx` })],
 
-          [/^rd-(\d+)$/, ([, d]) => ({ 'border-radius': `${d}rpx` })],
-          [/^lh-(\d+)$/, ([, d]) => ({ 'line-height': `${d}rpx` })],
+          [/^rd-(\d+)$/, ([, d]: any) => ({ 'border-radius': `${d}rpx` })],
+          [/^lh-(\d+)$/, ([, d]: any) => ({ 'line-height': `${d}rpx` })],
 
-          [/^gap-(\d+)$/, ([, d]) => ({ gap: `${d}rpx` })],
-          [/^gap-y-(\d+)$/, ([, d]) => ({ gap: `${d}rpx 0` })],
-          [/^gap-x-(\d+)$/, ([, d]) => ({ gap: `0 ${d}rpx` })],
+          [/^gap-(\d+)$/, ([, d]: any) => ({ gap: `${d}rpx` })],
+          [/^gap-y-(\d+)$/, ([, d]: any) => ({ gap: `${d}rpx 0` })],
+          [/^gap-x-(\d+)$/, ([, d]: any) => ({ gap: `0 ${d}rpx` })],
 
-          [/^rd-t-(\d+)$/, ([, d]) => ({ 'border-top-left-radius': `${d}rpx`, 'border-top-right-radius': `${d}rpx` })],
-          [/^rd-b-(\d+)$/, ([, d]) => ({ 'border-bottom-left-radius': `${d}rpx`, 'border-bottom-right-radius': `${d}rpx` })],
+          [/^rd-t-(\d+)$/, ([, d]: any) => ({ 'border-top-left-radius': `${d}rpx`, 'border-top-right-radius': `${d}rpx` })],
+          [/^rd-b-(\d+)$/, ([, d]: any) => ({ 'border-bottom-left-radius': `${d}rpx`, 'border-bottom-right-radius': `${d}rpx` })],
         ],
+      }),
+
+      dts({
+        rollupTypes: true,
       }),
     ],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
+      },
+    },
+
+    build: {
+      outDir: 'lib/vue', // 输出文件名
+      // 库编译模式配置
+      lib: {
+        entry: path.resolve(__dirname, './src/components/index.ts'), // 指定组件编译入口文件
+        name: 'index',
+        fileName: 'index',
+      },
+      rollupOptions: {
+        // 确保外部化处理那些你不想打包进库的依赖
+        external: ['vue', 'unocss'],
+        output: {
+          // 在 UMD 构建模式下为这些外部化的依赖提供一个全局变量
+          globals: {
+            vue: 'Vue',
+          },
+        },
       },
     },
   })

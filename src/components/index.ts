@@ -1,23 +1,30 @@
 import type { App, Component } from 'vue'
 
-import verifyCode from '@/components/button/verify-code.vue'
+import button from './button/button.vue'
+import verifyCode from './verify-code/verify-code.vue'
+import popover from './popover/popover.vue'
+import 'uno.css'
+import '../assets/css/var.css'
+import './index.scss'
 
-// const components: Component = [
-//   verifyCode,
-// ]
+export {
+  button,
+  verifyCode,
+  popover,
+}
 
-// const install = function (Vue: any) {
-//   components.forEach((component: Component) => {
-//     Vue.component(component.name, component)
-//   })
-// }
-
-// export default install
+const components: Component = [
+  verifyCode,
+  button,
+  popover,
+]
 
 const componentPlugin = {
-  install(app: App) {
-    console.log('app:', app)
-    app.component(verifyCode.__name as any, verifyCode)
+  install(app: App, prefix: string) {
+    components.forEach((component: Component | any) => {
+      const name = prefix ? `${prefix}-${component.__name}` : component.__name
+      app.component(name, component)
+    })
   },
 }
 

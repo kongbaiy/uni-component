@@ -1,4 +1,4 @@
 import { installComponent } from '../common/install'
-import create from './button.vue'
+import create from './slide-delete.vue'
 
 export default installComponent(create)

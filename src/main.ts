@@ -1,15 +1,15 @@
 import { createSSRApp } from 'vue'
 
+// import vubc from '../lib/vue/index'
+import vubc from 'vubc'
 import App from './App.vue'
-import 'uno.css'
-import './assets/css/var.css'
-import './components/index.scss'
-import zs from './components/index.ts'
+
+import '../lib/vue/style.css'
 
 export function createApp() {
   const app = createSSRApp(App)
-  app.use(zs)
 
+  app.use(vubc, 'zs')
   return {
     app,
   }
